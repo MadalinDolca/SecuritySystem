@@ -1,0 +1,134 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* impartirea in pagina */
+.rand {
+    display: flex;
+}
+
+.coloana {
+    flex: 50%;
+}
+
+/* elementele tabelului */
+.tabelDate {
+    max-width: 600px;
+    margin: auto;
+    border: 1px solid black;
+    border-spacing: 0;
+    border-radius: 15px;
+}
+
+.tabelDate thead,
+.tabelDate tbody {
+    display: block;
+}
+
+.tabelDate thead {
+    padding: 10px;
+    color: white;
+    background: black;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.tabelDate tbody {
+    display: block;
+    height: 600px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.tabelDate th,
+.tabelDate td {
+    width: 300px;
+    text-align: left;
+}
+
+.tabelDate tbody td {
+    padding: 10px;
+}
+
+/*
+.tabelDate td,
+.tabelDate th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.tabelDate tr:nth-child(even) {
+    background-color: #9e9e9e;
+} */
+
+/* elementele din galerie */
+.galerie {
+    max-width: 600px;
+    margin: auto;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+.titluGalerie {
+    width: auto;
+    padding: 10px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    background: black;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+#idGalerie {
+    display: block;
+    height: 600px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.elementGalerie {
+    float: left;
+    margin: 5px;
+    width: 180px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+
+.elementGalerie:hover {
+    border: 1px solid black;
+}
+
+.elementGalerie img {
+    width: 100%;
+    height: auto;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+.descriere {
+    padding: 15px;
+    text-align: center;
+}
+
+/* scroll bar */
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: black;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

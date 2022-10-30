@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Proiect</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/style.css') }}">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // conectare la server socket
+            var socket = io.connect('http://' + document.domain + ':' + location.port + '/test');
+
+            var vectorNumePozeEfectuate = []; // vector pentru memorarea numelor pozelor efectuate
+            var vectorTimeStampMiscari = []; // vector pentru memorarea timestamp-urilor miscarilor
+
+            // receptionare detalii poze efectuate de la server
+            socket.on('poze_efectuate', function (obiectDate) {
+                console.log("Poza efectuata: " + obiectDate.numePozaEfectuata);
+
+                vectorNumePozeEfectuate.push(obiectDate.numePozaEfectuata); // adaugare date poza in vector
+
+                stringNumePozeEfectuate = ''; // string pentru memorarea tuturor numelor imaginilor
+                stringBlocuriPozeEfectuate = ''; // string pentru memorarea tuturor blocurilor imaginilor din galerie
+
+                // construirea unui string cu numele tuturor imaginilor din vector
+                for (var i = 0; i < vectorNumePozeEfectuate.length; i++) {
+                    stringNumePozeEfectuate = '<p>' + vectorNumePozeEfectuate[i] + '</p>' + stringNumePozeEfectuate;
+                }
+
+                // construirea unui string cu blocurile pentru afisarea imaginilor in galerie
+                for (var i = 0; i < vectorNumePozeEfectuate.length; i++) {
+                    numeFisier = 'imagini/' + vectorNumePozeEfectuate[i];
+
+                    stringBlocuriPozeEfectuate =
+                        `<div class="elementGalerie">
+                            <a target="_blank" href="static/imagini/${vectorNumePozeEfectuate[i]}">
+                                <img src="static/imagini/${vectorNumePozeEfectuate[i]}" alt="" width="600" height="400"/>
+                            </a>
+
+                            <div class="descriere">${vectorNumePozeEfectuate[i]}</div>
+                        </div>`
+                        +
+                        stringBlocuriPozeEfectuate;
+                }
+
+                $('#idCapturiEfectuate').html(stringNumePozeEfectuate); // elementul HTML in care se va adauga numele pozelor efectuate
+                $('#idGalerie').html(stringBlocuriPozeEfectuate);
+            });
+
+            // receptionare detalii timestamp miscari de la server
+            socket.on('timestamp_miscare', function (obiectDate) {
+                console.log("Timestamp: " + obiectDate.timeStampDetectie);
+
+                // if (vector_timestamp.length >= 10){
+                //     vector_timestamp.shift()
+                // }  
+
+                vectorTimeStampMiscari.push(obiectDate.timeStampDetectie); // adaugare date miscare in vector
+                stringTimeStamp = ''; // string pentru memorarea tuturor detectiilor
+
+                // afisarea tuturor detectiilor din vector
+                for (var i = 0; i < vectorTimeStampMiscari.length; i++) {
+                    stringTimeStamp = stringTimeStamp + '<p>' + vectorTimeStampMiscari[i].toString() + '</p>';
+                }
+
+                $('#idTimestampMiscari').html(stringTimeStamp); // elementul HTML in care se vor adauga detectiile
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <!-- <form method="POST">
+        <input name="text">
+        <input type="submit">
+    </form> -->
+
+    <!-- <form action="comenzi" method="post"> -->
+    <!-- <form>
+        <input type="submit" name="opreste_senzorul" value="Opreste senzorul">
+        <input type="submit" name="porneste_senzorul" value="Porneste senzorul">
+        <input type="submit" name="mesaj_leduri" value="Mesaj leduri">
+    </form> -->
+
+    <div class="rand">
+        <!-- Coloana tabel date -->
+        <div class="coloana">
+            <table class="tabelDate">
+                <thead>
+                    <tr>
+                        <th>Capturi Efectuate</th>
+                        <th>Timestamp Mișcări</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td id="idCapturiEfectuate"></td>
+                        <td id="idTimestampMiscari"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Coloana imagini -->
+        <div class="coloana">
+            <div class="galerie">
+                <div class="titluGalerie">Poze Efectuate</div>
+                <div id="idGalerie"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

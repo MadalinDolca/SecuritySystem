@@ -1,0 +1,19 @@
+SENZOR MISCARE
+PI: Rosu 5V | Negru GND | Galben GPIO 7
+
+#########
+
+LED
+PI: GPIO 17 | GND
+
+#########
+
+SWITCH
+PI: GPIO 24
+FPGA: SW1
+
+#########
+
+ALIMENTARE
+PI: 3v3     | GND
+FPGA: VDD   | GND
