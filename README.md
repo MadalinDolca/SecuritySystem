@@ -17,9 +17,12 @@ Within this project I built a simple PI security system that takes photos upon d
 
 ## 🔮 Technologies
 
-- Python as the backend language
-- Flask for the server that runs on Raspberry PI
-- JavaScript for the web interface
+- **Python** as the backend language
+- **Flask** web framework for the server that runs on Raspberry Pi
+- **RPi.GPIO** Python module to control the GPIO on a Raspberry Pi
+- **Subprocess** to trigger the pictures 
+- **SocketIO** to turn the Flask server into a SocketIO app
+- **jQuery** to receive and show the data sent by the server through a socket
 
 ## 💾 Hardware used
 
